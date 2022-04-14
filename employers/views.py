@@ -19,7 +19,7 @@ from .serializers import *
 # ------section homePage -------------------#
 
 def index(request):
-    return render(request, "employers/index.html")
+    return render(request, "index.html")
 
 # ------endSection homePage ----------------#
 
