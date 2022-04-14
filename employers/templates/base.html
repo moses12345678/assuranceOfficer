@@ -2,9 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>{% block title %}Direction de la police Gn{% endblock %}</title>
 
     <!-- CSS only -->
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
     <!-- Template Main CSS File -->
     <!-- Vendor CSS Files -->
     <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
@@ -115,6 +122,19 @@
       <h1>Direction de la police Nationale</h1>
     </div>
     <div class="card-body">{% block content %} {% endblock %}</div>
+    <!--Footer-->
+    <div class="card text-center">
+      <div class="card-header">Police Nationale</div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">
+          With supporting text below as a natural lead-in to additional content.
+        </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+      <div class="card-footer text-muted">Text ici</div>
+    </div>
+    <!--endfooter-->
     <!-- JS, Popper.js, and jQuery -->
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
