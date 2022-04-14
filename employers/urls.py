@@ -3,7 +3,7 @@ from django.urls import path, include
 
 urlpatterns = [
     #path('', views.index, name='index'),
-    path('', views.EmployerList, name='employers-list'),
+    path('employers-list', views.EmployerList, name='employers-list'),
     path('employers-search', views.EmployerSearch, name='employers-search'),
     path('employer-create', views.EmployerCreate, name='employer-create'),
     path('employer-update/<int:pk>', views.EmployerUpdate, name='employer-update'),
