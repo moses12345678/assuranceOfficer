@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ew1k2unp32kfi^q9@p9gfw6e&2r&t&7-fa)bj0-ib)81yzyir7
 DEBUG = True
 
 ALLOWED_HOSTS = ['Meanc-env.eba-cfxxih62.us-east-2.elasticbeanstalk.com', 'meanc2.herokuapp.com',
-                 'app.2nbm.com', 'https://mdiallo.com', 'meanc2.azurewebsites.net', '127.0.0.1']
+                 'app.2nbm.com', 'https://mdiallo.com', 'meanc2.azurewebsites.net', '127.0.0.1', '0.0.0.0']
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
