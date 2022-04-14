@@ -10,53 +10,55 @@
     >
   </div>
   <br />
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Nom</th>
-        <th scope="col">Prenom</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone</th>
-        <th scope="col">Date Eng</th>
-        <th scope="col">Date Update</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for employers in page_obj %}
-      <tr>
-        <td>{{ employers.firstname }}</td>
-        <td>{{ employers.lastname }}</td>
-        <td>{{ employers.email }}</td>
-        <td>{{ employers.phone }}</td>
-        <td>{{ employers.registrationDate }}</td>
-        <td>{{ employers.date_updated }}</td>
-        <td>
-          <a
-            type="button"
-            class="btn btn-info"
-            href="/employer-detail/{{ employers.pk }}"
-            >Detail</a
-          >
-          <a
-            type="button"
-            class="btn btn-warning"
-            href="/employer-update/{{ employers.pk }}"
-            >Update</a
-          >
-          {% if perms.auth.delete_user %}
-          <a
-            type="button"
-            class="btn btn-danger"
-            href="/employer-delete/{{ employers.id }}"
-            >Delete</a
-          >
-          {% endif %}
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Prenom</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Date Eng</th>
+          <th scope="col">Date Update</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for employers in page_obj %}
+        <tr>
+          <td>{{ employers.firstname }}</td>
+          <td>{{ employers.lastname }}</td>
+          <td>{{ employers.email }}</td>
+          <td>{{ employers.phone }}</td>
+          <td>{{ employers.registrationDate }}</td>
+          <td>{{ employers.date_updated }}</td>
+          <td>
+            <a
+              type="button"
+              class="btn btn-info"
+              href="/employer-detail/{{ employers.pk }}"
+              >Detail</a
+            >
+            <a
+              type="button"
+              class="btn btn-warning"
+              href="/employer-update/{{ employers.pk }}"
+              >Update</a
+            >
+            {% if perms.auth.delete_user %}
+            <a
+              type="button"
+              class="btn btn-danger"
+              href="/employer-delete/{{ employers.id }}"
+              >Delete</a
+            >
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
   <!--<a type="button" class="btn btn-success" href="{%url 'employer-create' %}"
     >Create</a
   > -->

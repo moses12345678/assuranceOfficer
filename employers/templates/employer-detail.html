@@ -29,38 +29,24 @@
           </tr>
         </thead>
         <tbody>
-          {% for employers in page_obj %}
           <tr>
-            <td>{{ employers.firstname }}</td>
-            <td>{{ employers.lastname }}</td>
-            <td>{{ employers.email }}</td>
-            <td>{{ employers.phone }}</td>
-            <td>{{ employers.registrationDate }}</td>
-            <td>{{ employers.date_updated }}</td>
-            <td>
-              <a
-                type="button"
-                class="btn btn-info"
-                href="/employer-detail/{{ employers.pk }}"
-                >Detail</a
-              >
-              <a
-                type="button"
-                class="btn btn-warning"
-                href="/employer-update/{{ employers.pk }}"
-                >Update</a
-              >
-              {% if perms.auth.delete_user %}
-              <a
-                type="button"
-                class="btn btn-danger"
-                href="/employer-delete/{{ employers.id }}"
-                >Delete</a
-              >
-              {% endif %}
-            </td>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
           </tr>
-          {% endfor %}
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
         </tbody>
       </table>
     </div>
