@@ -1,0 +1,45 @@
+{% extends "base.html" %}{% block content %}{% if user.is_authenticated %}
+<!--qr-code-->
+{%load qr_code %}
+<!--qr-code-->
+<div class="row">
+  <div class="col-sm-8">
+    <div class="text-center">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="https://robohash.org/{{data.pk}}?200x200"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Carte de Membre N= {{data.pk}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="text-center">
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">Carte de Membre N= {{data.pk}}</h5>
+          <p>{% qr_from_text data.pk size="M" %}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            {{ data.firstname }} {{ data.lastname }}
+          </li>
+          <li class="list-group-item">{{ data.phone }}</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="btn btn-info">Imprimer</a>
+          <!--<a href="#" class="btn btn-warning">Detail</a>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% else %}
+<p>Vous n'etes pas connecter</p>
+<a class="btn btn-outline-primary" href="{% url 'login' %}">Connecter ici</a>
+{% endif %} {% endblock %}

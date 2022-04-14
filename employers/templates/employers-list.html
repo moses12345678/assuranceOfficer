@@ -1,0 +1,103 @@
+{% extends "base.html" %} {% block content %} {% if user.is_authenticated %}
+<div class="card-body">
+  <!--<div class="text-left">
+    <a type="button" class="btn btn-info" href="{% url 'logout' %}">Log Out</a>
+  </div>-->
+  <h4 class="text-center">List total des employers: {{count}}</h4>
+  <div class="text-right">
+    <a type="button" class="btn btn-success" href="{%url 'employer-create' %}"
+      >Ajouter</a
+    >
+  </div>
+  <br />
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Prenom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Date Eng</th>
+        <th scope="col">Date Update</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for employers in page_obj %}
+      <tr>
+        <td>{{ employers.firstname }}</td>
+        <td>{{ employers.lastname }}</td>
+        <td>{{ employers.email }}</td>
+        <td>{{ employers.phone }}</td>
+        <td>{{ employers.registrationDate }}</td>
+        <td>{{ employers.date_updated }}</td>
+        <td>
+          <a
+            type="button"
+            class="btn btn-info"
+            href="/employer-detail/{{ employers.pk }}"
+            >Detail</a
+          >
+          <a
+            type="button"
+            class="btn btn-warning"
+            href="/employer-update/{{ employers.pk }}"
+            >Update</a
+          >
+          {% if perms.auth.delete_user %}
+          <a
+            type="button"
+            class="btn btn-danger"
+            href="/employer-delete/{{ employers.id }}"
+            >Delete</a
+          >
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <!--<a type="button" class="btn btn-success" href="{%url 'employer-create' %}"
+    >Create</a
+  > -->
+
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a type="button" class="btn btn-info" href="?page=1">&laquo;debut</a>
+      <a
+        type="button"
+        class="btn btn-success"
+        href="?page={{ page_obj.previous_page_number }}"
+        >prev</a
+      >
+      {% endif %}
+
+      <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+      <a
+        type="button"
+        class="btn btn-info"
+        href="?page={{ page_obj.next_page_number }}"
+        >suiv</a
+      >
+      <a
+        type="button"
+        class="btn btn-success"
+        href="?page={{ page_obj.paginator.num_pages }}"
+        >fin &raquo;</a
+      >
+      {% endif %}
+    </span>
+  </div>
+</div>
+<!-- begin else for login-->
+{% else %}
+<p>Vous n'etes pas connecter</p>
+<a class="btn btn-outline-primary" href="{% url 'login' %}">Connecter ici</a>
+{% endif %}
+<!-- end else for login-->
+{% endblock %}
