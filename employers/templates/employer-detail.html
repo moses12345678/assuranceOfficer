@@ -8,9 +8,13 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="main-breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'employers-list' %}">Accueil</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'employers-list' %}">Retour</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Mon Profile</li>
       </ol>
     </nav>
     <!-- /Breadcrumb -->
@@ -28,10 +32,8 @@
               />
               <div class="mt-3">
                 <h4>{{data.firstname}} {{data.lastname}}</h4>
-                <p class="text-secondary mb-1">
-                  Statut: Police Nationale/FSSPC
-                </p>
-                <p class="text-muted font-size-sm">Matricule: 279524D</p>
+                <p class="text-secondary mb-1">{{data.status}}</p>
+                <p class="text-muted font-size-sm">{{data.matricule}}</p>
                 <p>{% qr_from_text data.pk size="M" %}</p>
                 <button class="btn btn-primary">Follow</button>
                 <button class="btn btn-outline-primary">Message</button>
