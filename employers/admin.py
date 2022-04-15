@@ -6,7 +6,7 @@ from .models import Employers
 
 class EmployersAdmin(admin.ModelAdmin):
     list_display = ('firstname', 'lastname', 'email',
-                    'phone', 'registrationDate', 'date_updated')
+                    'phone', 'image', 'registrationDate', 'date_updated')
 
 
 admin.site.register(Employers, EmployersAdmin)

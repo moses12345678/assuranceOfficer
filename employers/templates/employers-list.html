@@ -2,8 +2,14 @@
 <div class="card-body">
   <!--<div class="text-left">
     <a type="button" class="btn btn-info" href="{% url 'logout' %}">Log Out</a>
-  </div>-->
-  <h4 class="text-center">List total des employers: {{count}}</h4>
+  </div>
+  <h4 class="text-center">List total des employers: {{count}}</h4>-->
+  <div class="card">
+    <div class="card-header">
+      <h4 class="text-center">List total des employers: {{count}}</h4>
+    </div>
+  </div>
+  <hr />
   <div class="text-right">
     <a type="button" class="btn btn-success" href="{%url 'employer-create' %}"
       >Ajouter</a
@@ -14,6 +20,7 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
+          <th scope="col">ID</th>
           <th scope="col">Nom</th>
           <th scope="col">Prenom</th>
           <th scope="col">Email</th>
@@ -26,6 +33,7 @@
       <tbody>
         {% for employers in page_obj %}
         <tr>
+          <td>{{ employers.pk }}</td>
           <td>{{ employers.firstname }}</td>
           <td>{{ employers.lastname }}</td>
           <td>{{ employers.email }}</td>

@@ -1,5 +1,7 @@
 from . import views
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -11,3 +13,7 @@ urlpatterns = [
     path('employer-detail/<int:pk>', views.detail_view, name='employer-detail'),
     path('qr_code/', include('qr_code.urls', namespace="qr_code")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

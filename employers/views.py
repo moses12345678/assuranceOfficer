@@ -61,7 +61,7 @@ def EmployerSearch(request):
 
     if search_post:
         employers = Employers.objects.filter(
-            Q(phone=search_post))
+            Q(pk=search_post))
     else:
         employers = Employers.objects.all().order_by("firstname")
 
@@ -71,7 +71,7 @@ def EmployerSearch(request):
 
 def EmployerCreate(request):
     if request.method == "POST":
-        form = EmployerForm(request.POST or None)
+        form = EmployerForm(request.POST, request.FILES)
         if form.is_valid():
             try:
                 form.save()
@@ -103,9 +103,9 @@ def detail_view(request, pk):
 def EmployerUpdate(request, pk):
     employers = Employers.objects.get(pk=pk)
     form = EmployerForm(initial={'firstname': employers.firstname, 'lastname': employers.lastname,
-                                 'email': employers.email, 'phone': employers.phone})
+                                 'email': employers.email, 'status': employers.status, 'matricule': employers.matricule, 'phone': employers.phone, 'image': employers.image})
     if request.method == "POST":
-        form = EmployerForm(request.POST, instance=employers)
+        form = EmployerForm(request.POST, request.FILES, instance=employers)
         if form.is_valid():
             try:
                 form.save()

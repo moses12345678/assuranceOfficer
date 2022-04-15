@@ -1,7 +1,6 @@
 from atexit import register
 from xml.dom.minidom import Document
 from django.db import models
-
 # Create your models here.
 choice = (
     ("Police Nationale/FSSPC", "Police Nationale/FSSPC"),
@@ -19,6 +18,7 @@ class Employers(models.Model):
                               )
     matricule = models.CharField(max_length=350, null=True)
     phone = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='images', blank="True")
     registrationDate = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
