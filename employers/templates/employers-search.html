@@ -8,61 +8,64 @@
       >Ajouter</a
     >
   </div>
-  <br />
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Nom</th>
-        <th scope="col">Prenom</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone</th>
-        <th scope="col">Date Eng</th>
-        <th scope="col">Date Update</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for employers in employers %} {% if employers is not None %}
-      <tr>
-        <td>{{ employers.firstname }}</td>
-        <td>{{ employers.lastname }}</td>
-        <td>{{ employers.email }}</td>
-        <td>{{ employers.phone }}</td>
-        <td>{{ employers.registrationDate }}</td>
-        <td>{{ employers.date_updated }}</td>
-        <td>
-          <a
-            type="button"
-            class="btn btn-info"
-            href="/employer-detail/{{ employers.pk }}"
-            >Detail</a
-          >
-          <a
-            type="button"
-            class="btn btn-warning"
-            href="/employer-update/{{ employers.pk }}"
-            >Update</a
-          >
-          {% if perms.auth.delete_user %}
-          <a
-            type="button"
-            class="btn btn-danger"
-            href="/employer-delete/{{ employers.id }}"
-            >Delete</a
-          >
-          {% endif %}
-        </td>
-      </tr>
-      {% else %}
-      <td>No found</td>
-      {% endif%} {% endfor %}
-    </tbody>
-  </table>
+  <hr />
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Prenom</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Date Eng</th>
+          <th scope="col">Date Update</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for employers in employers %} {% if employers is not None %}
+        <tr>
+          <td>{{ employers.firstname }}</td>
+          <td>{{ employers.lastname }}</td>
+          <td>{{ employers.email }}</td>
+          <td>{{ employers.phone }}</td>
+          <td>{{ employers.registrationDate }}</td>
+          <td>{{ employers.date_updated }}</td>
+          <td>
+            <a
+              type="button"
+              class="btn btn-info"
+              href="/employer-detail/{{ employers.pk }}"
+              >Detail</a
+            >
+            <a
+              type="button"
+              class="btn btn-warning"
+              href="/employer-update/{{ employers.pk }}"
+              >Update</a
+            >
+            {% if perms.auth.delete_user %}
+            <a
+              type="button"
+              class="btn btn-danger"
+              href="/employer-delete/{{ employers.id }}"
+              >Delete</a
+            >
+            {% endif %}
+          </td>
+        </tr>
+        {% else %}
+        <td>No found</td>
+        {% endif%} {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
-<!-- begin else for login-->
-{% else %}
-<p>Vous n'etes pas connecter</p>
-<a class="btn btn-outline-primary" href="{% url 'login' %}">Connecter ici</a>
-{% endif %}
-<!-- end else for login-->
-{% endblock %}
+  <!-- begin else for login-->
+  {% else %}
+  <p>Vous n'etes pas connecter</p>
+  <a class="btn btn-outline-primary" href="{% url 'login' %}">Connecter ici</a>
+  {% endif %}
+  <!-- end else for login-->
+  {% endblock %}
+</div>
