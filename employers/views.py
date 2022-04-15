@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 # import orange sms
-from python_orange_sms import utils
+#from python_orange_sms import utils
 #import employers
 from .models import Employers
 from .forms import EmployerForm
@@ -18,17 +18,17 @@ from .models import Employers
 from .serializers import *
 
 #-----------Integration Orange Sms----------#
-SENDER_NAME = 'Innov'  # Name of your app in dev console
-AUTH_TOKEN = 'Authorization header'  # Authorization header from dev console
+# SENDER_NAME = 'Innov'  # Name of your app in dev console
+# AUTH_TOKEN = 'Authorization header'  # Authorization header from dev console
 
-message = "The sms message you want to send to the recipient"  # Your message
-recipient_phone_number = '243xxxxxxxxx'  # a Receiver phone number
-dev_phone_number = '243xxxxxxxxx'  # Sender (your phone number)
+# message = "The sms message you want to send to the recipient"  # Your message
+# recipient_phone_number = '243xxxxxxxxx'  # a Receiver phone number
+# dev_phone_number = '243xxxxxxxxx'  # Sender (your phone number)
 # recipient_phone_number and dev_phone_number are international phone numbers without + or leading zeros:  format regex('^[1-9][\d]{10,14}$')
 
-sms = utils.SMS(AUTH_TOKEN=AUTH_TOKEN, )
-res = sms.send_sms(message=message,
-                   dev_phone_number=dev_phone_number,       recipient_phone_number=recipient_phone_number)
+#sms = utils.SMS(AUTH_TOKEN=AUTH_TOKEN, )
+# res = sms.send_sms(message=message,
+# dev_phone_number=dev_phone_number,       recipient_phone_number=recipient_phone_number)
 #--------end integration Orange Sms---------#
 
 
