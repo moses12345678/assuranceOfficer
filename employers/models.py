@@ -18,7 +18,7 @@ class Employers(models.Model):
                               )
     matricule = models.CharField(max_length=350, null=True)
     phone = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(upload_to='images/', blank="true")
     registrationDate = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
