@@ -12,7 +12,7 @@ from django.db.models import Q
 # import orange sms
 #from python_orange_sms import utils
 #import employers
-from .models import Employers
+from .models import *
 from .forms import EmployerForm
 from .models import Employers
 from .serializers import *
@@ -86,15 +86,16 @@ def EmployerCreate(request):
 # after updating it will redirect to detail_View
 
 
-def detail_view(request, pk):
+def detail_view(request, person):
     # dictionary for initial data with
     # field names as keys
     context = {}
+    #context1 = {}
     #n1 = Employers.objects.filter(status='1')
     #n2 = Employers.objects.filter(status='2')
     # add the dictionary during initialization
-    context["data"] = Employers.objects.get(pk=pk)
-
+    context["data"] = Employers.objects.get(pk=person)
+    context["data1"] = Traitement.objects.filter(person=person)
     return render(request, "employer-detail.html", context)
     # {'n1': n1,
     # 'n2': n2})

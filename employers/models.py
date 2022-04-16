@@ -1,6 +1,6 @@
-from atexit import register
-from xml.dom.minidom import Document
 from django.db import models
+
+import employers
 # Create your models here.
 choice = (
     ("Police Nationale/FSSPC", "Police Nationale/FSSPC"),
@@ -24,3 +24,13 @@ class Employers(models.Model):
 
     def __str__(self):
         return self.firstname
+
+
+class Traitement(models.Model):
+    type_traitement = models.CharField(max_length=500)
+    montant_total = models.FloatField(blank=True, null=True)
+    montant_a_payer = models.FloatField(blank=True, null=True)
+    person = models.ForeignKey(Employers, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.type_traitement

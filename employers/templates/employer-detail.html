@@ -190,19 +190,19 @@
                     <th>Date</th>
                     <th>Facture</th>
                     <th>Partenaire</th>
-                    <th>Observation</th>
                   </tr>
                 </thead>
                 <tbody id="items">
+                  {% for traitement in data1 %}
                   <tr>
                     <td>1</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
+                    <td>{{traitement.type_traitement}}</td>
+                    <td>{{traitement.montant_total}}GNF</td>
+                    <td>{{traitement.montant_a_payer}}GNF</td>
+                    <td>{{traitement.person}}</td>
+                    <td>{{user.username}}</td>
                   </tr>
+                  <!--
                   <tr>
                     <td>2</td>
                     <td>Table cell</td>
@@ -220,70 +220,8 @@
                     <td>Table cell</td>
                     <td>Table cell</td>
                     <td>Table cell</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                  </tr>
-                  <tr>
-                    <td>7</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                  </tr>
-                  <tr>
-                    <td>8</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                  </tr>
-                  <tr>
-                    <td>9</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                  </tr>
-                  <tr>
-                    <td>10</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                  </tr>
+                  </tr>-->
+                  {% endfor %}
                 </tbody>
               </table>
               <hr />

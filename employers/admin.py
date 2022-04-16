@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Employers
+from .models import *
+
 
 # Register your models here.
 
@@ -10,3 +11,11 @@ class EmployersAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Employers, EmployersAdmin)
+
+
+class TraitementAdmin(admin.ModelAdmin):
+    list_display = ('type_traitement', 'montant_total',
+                    'montant_a_payer', 'person')
+
+
+admin.site.register(Traitement, TraitementAdmin)
