@@ -6,7 +6,7 @@ from .models import *
 
 
 class EmployersAdmin(admin.ModelAdmin):
-    list_display = ('firstname', 'lastname', 'email',
+    list_display = ('nom', 'prenom', 'email',
                     'phone', 'image', 'registrationDate', 'date_updated')
 
 
@@ -15,7 +15,7 @@ admin.site.register(Employers, EmployersAdmin)
 
 class TraitementAdmin(admin.ModelAdmin):
     list_display = ('type_traitement', 'montant_total',
-                    'montant_a_payer', 'person')
+                    'montant_a_payer', 'person', 'partenaire', 'registrationDate', 'date_updated')
 
 
 admin.site.register(Traitement, TraitementAdmin)

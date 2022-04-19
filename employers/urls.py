@@ -13,6 +13,10 @@ urlpatterns = [
     path('employer-delete/<int:pk>', views.EmployerDelete, name='employer-delete'),
     path('employer-detail/<int:person>',
          views.detail_view, name='employer-detail'),
+    path('traitement-create/<int:person>',
+         views.TraitementCreate, name='traitement-create'),
+    path('traitement-delete/<int:pk>',
+         views.TraitementDelete, name='traitement-delete'),
     path('qr_code/', include('qr_code.urls', namespace="qr_code")),
 ]
 

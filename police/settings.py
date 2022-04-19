@@ -46,6 +46,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.humanize',
     'django.contrib.contenttypes',
     'whitenoise.runserver_nostatic',
     'django.contrib.sessions',
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     'employers',
     'qr_code',
     'crispy_forms',
+    'calculation',
 ]
 
 MIDDLEWARE = [

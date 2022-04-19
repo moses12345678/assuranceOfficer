@@ -1,6 +1,5 @@
 from django.db import models
-
-import employers
+from django.contrib.auth.models import User
 # Create your models here.
 choice = (
     ("Police Nationale/FSSPC", "Police Nationale/FSSPC"),
@@ -9,8 +8,8 @@ choice = (
 
 
 class Employers(models.Model):
-    firstname = models.CharField(max_length=250)
-    lastname = models.CharField(max_length=250)
+    nom = models.CharField(max_length=250)
+    prenom = models.CharField(max_length=250)
     email = models.EmailField()
     status = models.CharField(max_length=60,
                               choices=choice,
@@ -23,14 +22,20 @@ class Employers(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.firstname
+        return self.nom
 
 
 class Traitement(models.Model):
     type_traitement = models.CharField(max_length=500)
     montant_total = models.FloatField(blank=True, null=True)
     montant_a_payer = models.FloatField(blank=True, null=True)
-    person = models.ForeignKey(Employers, on_delete=models.CASCADE)
+    person = models.ForeignKey(
+        Employers, on_delete=models.CASCADE, null=True, blank=True)
+    partenaire = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, blank=True)
+    facture = models.ImageField(upload_to='images/')
+    registrationDate = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.type_traitement

@@ -1,20 +1,24 @@
+#from ipaddress import summarize_address_range
 from django import views
+from django.db.models import Sum
 #from django.shortcuts import render, redirect
 from django.shortcuts import (get_object_or_404,
                               render, redirect,
                               HttpResponseRedirect)
+from matplotlib.pyplot import summer
 from qr_code.qrcode.utils import QRCodeOptions
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.contrib.auth.models import User
 # import orange sms
 #from python_orange_sms import utils
 #import employers
 from .models import *
-from .forms import EmployerForm
-from .models import Employers
+from .forms import *
+#from .models import Employers
 from .serializers import *
 
 #-----------Integration Orange Sms----------#
@@ -43,9 +47,10 @@ def index(request):
 
 
 def EmployerList(request):
-    employers = Employers.objects.all().order_by("firstname")
+    employers = Employers.objects.all().order_by("nom")
     count = employers.count()
     # Build context for rendering QR codes.
+    # 3 is the number of page that coul be apply
     paginator = Paginator(employers, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -63,7 +68,7 @@ def EmployerSearch(request):
         employers = Employers.objects.filter(
             Q(pk=search_post))
     else:
-        employers = Employers.objects.all().order_by("firstname")
+        employers = Employers.objects.all().order_by("nom")
 
     return render(request, "employers-search.html", {'employers': employers,
                                                      })
@@ -96,6 +101,10 @@ def detail_view(request, person):
     # add the dictionary during initialization
     context["data"] = Employers.objects.get(pk=person)
     context["data1"] = Traitement.objects.filter(person=person)
+    context["total"] = Traitement.objects.filter(person=person).aggregate(
+        Sum('montant_total')) or 0
+    context["depense20"] = Traitement.objects.filter(person=person).aggregate(
+        Sum('montant_a_payer')) or 0
     return render(request, "employer-detail.html", context)
     # {'n1': n1,
     # 'n2': n2})
@@ -103,7 +112,7 @@ def detail_view(request, person):
 
 def EmployerUpdate(request, pk):
     employers = Employers.objects.get(pk=pk)
-    form = EmployerForm(initial={'firstname': employers.firstname, 'lastname': employers.lastname,
+    form = EmployerForm(initial={'nom': employers.nom, 'prenom': employers.prenom,
                                  'email': employers.email, 'status': employers.status, 'matricule': employers.matricule, 'phone': employers.phone, 'image': employers.image})
     if request.method == "POST":
         form = EmployerForm(request.POST, request.FILES, instance=employers)
@@ -121,6 +130,33 @@ def EmployerDelete(request, pk):
     employers = Employers.objects.get(pk=pk)
     try:
         employers.delete()
+    except:
+        pass
+    return redirect('employers-list')
+
+
+def TraitementCreate(request, person):
+
+    id_person = Employers.objects.get(pk=person)
+    #traitement = Traitement.objects.get(person=id_person)
+    form = TraitementForm(
+        initial={'person': id_person, 'partenaire': request.user})
+    if request.method == "POST":
+        form = TraitementForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                form.save()
+                model = form.instance
+                return redirect('/employers-list')
+            except Exception as e:
+                pass
+    return render(request, 'traitement-create.html', {'form': form})
+
+
+def TraitementDelete(request, pk):
+    traitement = Traitement.objects.get(pk=pk)
+    try:
+        traitement.delete()
     except:
         pass
     return redirect('employers-list')
