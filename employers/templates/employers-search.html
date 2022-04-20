@@ -3,18 +3,30 @@
   <!--<div class="text-left">
     <a type="button" class="btn btn-info" href="{% url 'logout' %}">Log Out</a>
   </div>-->
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="main-breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'dashboard' %}">Accueil</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Liste</li>
+      </ol>
+    </nav>
+    <!-- /Breadcrumb -->
   <div class="card">
     <div class="card-header">
       <h4 class="text-center">details de l'agent ci-dessous</h4>
     </div>
   </div>
   <hr />
+  {% if perms.auth.delete_user %}
   <div class="text-right">
     <a type="button" class="btn btn-success" href="{%url 'employer-create' %}"
       >Ajouter</a
     >
   </div>
   <hr />
+  {% endif%}
   <div class="table-responsive">
     <table class="table">
       <thead class="thead-dark">
@@ -29,7 +41,9 @@
         </tr>
       </thead>
       <tbody>
-        {% for employers in employers %} {% if employers is not None %}
+        {% for employers in employers %} 
+        <!--if to find datda-->
+
         <tr>
           <td>{{ employers.nom }}</td>
           <td>{{ employers.prenom }}</td>
@@ -44,13 +58,14 @@
               href="/employer-detail/{{ employers.pk }}"
               >Detail</a
             >
+            {% if perms.auth.delete_user %}
             <a
               type="button"
               class="btn btn-warning"
               href="/employer-update/{{ employers.pk }}"
               >Update</a
             >
-            {% if perms.auth.delete_user %}
+            
             <a
               type="button"
               class="btn btn-danger"
@@ -60,9 +75,15 @@
             {% endif %}
           </td>
         </tr>
-        {% else %}
-        <td>No found</td>
-        {% endif%} {% endfor %}
+        {% empty %}
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="text-danger">Pas d'infos pour ce Numero &#9940;</td>
+        <td class="text-danger"></td>
+        <td></td>
+        <td></td>
+        {% endfor %}
       </tbody>
     </table>
   </div>

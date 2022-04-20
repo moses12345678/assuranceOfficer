@@ -4,6 +4,19 @@
 <!-- Endcrispy -->
 {% block content %} {% if user.is_authenticated %}
 <div class="row justify-content-center">
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url 'dashboard' %}">Accueil</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'employers-list' %}">Retour</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Mon Profile</li>
+    </ol>
+  </nav>
+  <!-- /Breadcrumb -->
   <div class="card border-0" style="width: 45rem">
     <div class="shadow-lg p-3 mb-5 bg-white rounded">
       <div class="card-body">

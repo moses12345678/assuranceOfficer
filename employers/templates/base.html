@@ -37,7 +37,33 @@
       href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}"
       rel="stylesheet"
     />
-
+    <!--Css  for daarsbord-->
+    <!--     Fonts and icons     -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
+    />
+    <!-- Nucleo Icons -->
+    <link href="{% static 'assets/css/nucleo-icons.css" rel="stylesheet' %}" />
+    <link href="{% static 'assets/css/nucleo-svg.css" rel="stylesheet' %}" />
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
+    <!-- CSS Files -->
+    <link
+      id="pagestyle"
+      href="{% static 'assets/css/material-dashboard.css?v=3.0.2' %}"
+      rel="stylesheet"
+    />
+    <!--end css for dashbord-->
     <!-- Template Main CSS File -->
     <link href="{% static 'assets/css/style.css'%}" rel="stylesheet" />
     <link
@@ -49,7 +75,7 @@
   </head>
   <body>
     <!-- Boostrap Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
       <a class="navbar-brand" href="{% url 'index' %}"
         ><img src="{% static 'assets/img/logo.png' %}" alt="" title=""
       /></a>
@@ -69,7 +95,7 @@
         <ul class="navbar-nav mr-auto">
           {% if user.is_authenticated %}
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'employers-list' %}"
+            <a class="nav-link" href="{% url 'dashboard' %}"
               >Accueil <span class="sr-only">(current)</span></a
             >
           </li>
@@ -78,11 +104,13 @@
               >Employers</a
             >
           </li>
+          {% if perms.auth.delete_user %}
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'employer-create' %}"
-              >Ajouter</a
+            <a class="nav-link active" href="{% url 'partenaire-list' %}"
+              >Partenaire</a
             >
           </li>
+          {% endif%}
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -125,16 +153,58 @@
     <div class="card-header">
       <h1>Direction de la police Nationale</h1>
     </div>
-    <div class="card-body">{% block content %} {% endblock %}</div>
+    <div class="card-body">
+      <!--block webpage-->
+      {% block content %}
+      <!--add page right here-->
+      {% endblock %}
+      <!--endblockPage-->
+    </div>
     <!--Footer-->
     <div class="card text-center">
-      <div class="card-header">Police Nationale</div>
+      <div class="card-header">
+        Le Fonds social de la Sécurité et de la Protection Civile
+      </div>
       <div class="card-body">
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">
           With supporting text below as a natural lead-in to additional content.
         </p>
-        <a href="#" class="btn btn-primary">f</a>
+        <!--<div class="d-flex flex-column align-items-center">
+          <h4 class="mb-4">Follow us</h4>
+          <ul>
+            <li>
+              <span class="social-icon social-facebook"
+                ><i class="fa fa-facebook"></i
+              ></span>
+            </li>
+            <li>
+              <span class="social-icon social-google"
+                ><i class="fa fa-google"></i
+              ></span>
+            </li>
+            <li>
+              <span class="social-icon social-linkedin"
+                ><i class="fa fa-linkedin"></i
+              ></span>
+            </li>
+            <li>
+              <span class="social-icon social-instagram"
+                ><i class="fa fa-instagram"></i
+              ></span>
+            </li>
+            <li>
+              <span class="social-icon social-twitter"
+                ><i class="fa fa-twitter"></i
+              ></span>
+            </li>
+          </ul>
+        </div>-->
+        <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="btn btn-danger"><i class="fa fa-google"></i></a>
+        <a href="#" class="btn btn-dark"><i class="fa fa-instagram"></i></a>
+        <a href="#" class="btn btn-danger"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="btn btn-info"><i class="fa fa-linkedin"></i></a>
       </div>
       <div class="card-footer text-muted">
         <div
@@ -178,5 +248,6 @@
 
     <!-- Template Main JS File -->
     <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/material-dashboard.min.js?v=3.0.2' %}"></script>
   </body>
 </html>

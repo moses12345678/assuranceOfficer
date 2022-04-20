@@ -75,7 +75,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'police.urls'
 # django_project/settings.py
-LOGIN_REDIRECT_URL = "/employers-list"
+LOGIN_REDIRECT_URL = "/dashboard"
 LOGOUT_REDIRECT_URL = "/accounts/login"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

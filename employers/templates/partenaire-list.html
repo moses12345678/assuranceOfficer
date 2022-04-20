@@ -1,0 +1,131 @@
+{% extends "base.html" %} {% block content %} {% if user.is_authenticated %}
+<div class="card-body">
+  <!--<div class="text-left">
+    <a type="button" class="btn btn-info" href="{% url 'logout' %}">Log Out</a>
+  </div>
+  <h4 class="text-center">List total des users: {{count}}</h4>-->
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url 'dashboard' %}">Accueil</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Liste</li>
+    </ol>
+  </nav>
+  <!-- /Breadcrumb -->
+  <div class="card">
+    <div class="card-header">
+      <h4 class="text-center">List total des users: {{count}}</h4>
+    </div>
+  </div>
+  <hr />
+  {% if perms.auth.delete_user %}
+  <div class="text-right">
+    <a type="button" class="btn btn-success" href="{%url 'employer-create' %}"
+      >Ajouter</a
+    >
+  </div>
+  <hr />
+  {% endif %}
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prenom</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Detail</th>
+          {% if perms.auth.delete_user %}
+          <th scope="col">Modifier</th>
+          <th scope="col">Supprimer</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for users in page_obj %}
+        <tr>
+          <td>{{ users.pk }}</td>
+          <td>{{ users.username }}</td>
+          <td>{{ users.last_name }}</td>
+          <td>{{ users.email }}</td>
+          <td>{{ users.phone }}</td>
+          <!--<td>{{ users.registrationDate }}</td>
+          <td>{{ users.date_updated }}</td>-->
+          <td>
+            <a
+              type="button"
+              class="btn btn-info"
+              href="/employer-detail/{{ users.pk }}"
+              >Detail</a
+            >
+          </td>
+          {% if perms.auth.delete_user %}
+          <td>
+            <a
+              type="button"
+              class="btn btn-warning"
+              href="/partenaire-update/{{ users.pk }}"
+              >Update</a
+            >
+          </td>
+          <td>
+            <a
+              type="button"
+              class="btn btn-danger"
+              href="/partenaire-delete/{{ users.id }}"
+              >Delete</a
+            >
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <!--<a type="button" class="btn btn-success" href="{%url 'employer-create' %}"
+    >Create</a
+  > -->
+
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a type="button" class="btn btn-info" href="?page=1">&laquo;debut</a>
+      <a
+        type="button"
+        class="btn btn-success"
+        href="?page={{ page_obj.previous_page_number }}"
+        >prev</a
+      >
+      {% endif %}
+
+      <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+      <a
+        type="button"
+        class="btn btn-info"
+        href="?page={{ page_obj.next_page_number }}"
+        >suiv</a
+      >
+      <a
+        type="button"
+        class="btn btn-success"
+        href="?page={{ page_obj.paginator.num_pages }}"
+        >fin &raquo;</a
+      >
+      {% endif %}
+    </span>
+  </div>
+</div>
+<!-- begin else for login-->
+{% else %}
+<p>Vous n'etes pas connecter</p>
+<a class="btn btn-outline-primary" href="{% url 'login' %}">Connecter ici</a>
+{% endif %}
+<!-- end else for login-->
+{% endblock %}

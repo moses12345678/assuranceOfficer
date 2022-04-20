@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django.shortcuts import (get_object_or_404,
                               render, redirect,
                               HttpResponseRedirect)
-from matplotlib.pyplot import summer
+#from matplotlib.pyplot import summer
 from qr_code.qrcode.utils import QRCodeOptions
 from rest_framework import viewsets, status
 from rest_framework.response import Response
@@ -13,6 +13,7 @@ from rest_framework.decorators import api_view
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 # import orange sms
 #from python_orange_sms import utils
 #import employers
@@ -42,6 +43,35 @@ def index(request):
     return render(request, "index.html")
 
 # ------endSection homePage ----------------#
+
+
+def home(request):
+    return render(request, "home.html")
+# ------section dashboard -------------------#
+
+
+def dashboard(request):
+    User = get_user_model()
+    users = User.objects.all().order_by("username")
+    count = users.count()
+    employers = Employers.objects.all().order_by("nom")
+    count1 = employers.count()
+    #context = {}
+    #context1 = {}
+    #n1 = Employers.objects.filter(status='1')
+    #n2 = Employers.objects.filter(status='2')
+    # add the dictionary during initialization
+    #context["data"] = Employers.objects.all()
+    # context["total"] = Traitement.objects.all().aggregate(
+    # Sum('montant_total')) or 0
+    # context["depense20"] = Traitement.objects.all().aggregate(
+    # Sum('montant_a_payer')) or 0
+    return render(request, "dashboard.html", {'count': count,
+                                              'count1': count1,
+                                              })
+
+
+# ------endSection dashboard ----------------#
 
 # ------section forms -------------------#
 
@@ -160,6 +190,23 @@ def TraitementDelete(request, pk):
     except:
         pass
     return redirect('employers-list')
+
+
+def PartenaireList(request):
+    User = get_user_model()
+    users = User.objects.all().order_by("username")
+    count = users.count()
+# Build context for rendering QR codes.
+# 3 is the number of page that coul be apply
+    paginator = Paginator(users, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "employers-list.html", {'users': users,
+                                                   'count': count,
+                                                   'page_obj': page_obj
+                                                   })
+
 
 #-------fin section forms ---------------#
 
