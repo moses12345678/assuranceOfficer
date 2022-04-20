@@ -99,12 +99,13 @@
               >Accueil <span class="sr-only">(current)</span></a
             >
           </li>
+          {% if perms.auth.delete_user %}
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'employers-list' %}"
               >Employers</a
             >
           </li>
-          {% if perms.auth.delete_user %}
+
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'partenaire-list' %}"
               >Partenaire</a
