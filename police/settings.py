@@ -17,29 +17,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ew1k2unp32kfi^q9@p9gfw6e&2r&t&7-fa)bj0-ib)81yzyir7'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = ['Meanc-env.eba-cfxxih62.us-east-2.elasticbeanstalk.com', 'meanc2.herokuapp.com',
-                 'app.2nbm.com', 'https://mdiallo.com', 'meanc2.azurewebsites.net', '127.0.0.1', '0.0.0.0', 'innovgn.herokuapp.com']
-
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'https://meanc2.herokuapp.com',
-    'https://meanc2.azurewebsites.net'
-
-]
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
-    'https://meanc2.azurewebsites.net']
-CORS_ORIGIN_ALLOW_ALL = True
-
 
 # Application definition
 
