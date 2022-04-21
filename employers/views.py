@@ -5,6 +5,7 @@ from django.db.models import Sum
 from django.shortcuts import (get_object_or_404,
                               render, redirect,
                               HttpResponseRedirect)
+from django.urls import reverse
 #from matplotlib.pyplot import summer
 from qr_code.qrcode.utils import QRCodeOptions
 from rest_framework import viewsets, status
@@ -176,8 +177,8 @@ def TraitementCreate(request, person):
         if form.is_valid():
             try:
                 form.save()
-                model = form.instance
-                return redirect('/employers-list')
+                #model = form.instance
+                return redirect('employer-detail', person=person)
             except Exception as e:
                 pass
     return render(request, 'traitement-create.html', {'form': form})
@@ -185,8 +186,10 @@ def TraitementCreate(request, person):
 
 def TraitementDelete(request, pk):
     traitement = Traitement.objects.get(pk=pk)
+    #id_person = Employers.objects.get(pk=traitement.person)
     try:
         traitement.delete()
+        # return redirect('employer-detail', person=20)
     except:
         pass
     return redirect('employers-list')
